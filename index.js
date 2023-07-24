@@ -15,6 +15,8 @@ app.post('/webhook', (req, res) => {
     const signature = req.headers['x-hub-signature'];
     const payload = JSON.stringify(req.body);
 
+    console.log(WEBHOOK_SECRET);
+
     const hash = crypto.createHmac('sha1', WEBHOOK_SECRET).update(payload).digest('hex');
     
     if (signature !== `sha1=${hash}`) {
